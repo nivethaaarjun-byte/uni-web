@@ -12,7 +12,6 @@ Flask-WTF==0.14.2
 idna==2.7
 itsdangerous==0.24
 Jinja2==2.10
-MarkupSafe==1.0
 mimerender==0.6.0
 psycopg2-binary==2.7.5
 python-dateutil==2.7.3
@@ -25,3 +24,4 @@ urllib3==1.23
 Werkzeug==0.14.1
 WTForms==2.2.1
 gunicorn
+MarkupSafe==2.0.1
