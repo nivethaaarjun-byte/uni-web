@@ -8,7 +8,7 @@ Flask-RESTful==0.3.6
 Flask-Restless==0.17.0
 Flask-SQLAlchemy==2.3.2
 Flask-Uploads==0.2.1
-Flask-WTF==0.14.2
+Flask-WTF==1.0.1
 idna==2.7
 itsdangerous==0.24
 Jinja2==2.11.3
@@ -21,7 +21,7 @@ requests==2.19.1
 six==1.11.0
 SQLAlchemy==1.2.10
 urllib3==1.23
-Werkzeug==0.14.1
+Werkzeug==1.0.1
 WTForms==2.2.1
 gunicorn
 MarkupSafe==2.0.1
