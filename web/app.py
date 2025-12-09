@@ -21,9 +21,10 @@ from flask_restful import Resource, Api
 app = Flask(__name__)
 api = Api(app)
 app.debug = True
-
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://xuemc:xuemc@localhost/xue$
-    # 'SQLALCHEMY_DATABASE_URI'] = 'postgresql://xuemc_db:xuemc@localhost/admin$"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    "DATABASE_URL",
+    "sqlite:///local.db"   # used only when DATABASE_URL is not set (like on your laptop)
+)
 app.config['WTF_CSRF_ENABLED'] = True
 app.config['SECRET_KEY'] = 'you-will-never-..guess'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
