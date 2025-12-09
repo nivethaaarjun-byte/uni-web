@@ -228,4 +228,7 @@ class Messages(Resource):
 api.add_resource(Messages, '/bd/api/messages')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=5010)
+    import os
+    port = int(os.environ.get('PORT', 5010))
+    debug = os.environ.get('FLASK_ENV', 'production') != 'production'
+    app.run(host='0.0.0.0', debug=debug, port=port)
