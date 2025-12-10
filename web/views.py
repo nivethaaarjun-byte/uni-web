@@ -6,8 +6,8 @@ import datetime
 from flask import render_template, send_from_directory, session, redirect, url_for
 from flask_login import login_user, logout_user, current_user, login_required
 from flask import Markup, request
-from app import app
-from forms import SchoolForm, PageInfo, InstitutionForm, BulletinForm, AccountForm
+from web.app import app
+from web.forms import SchoolForm, PageInfo, InstitutionForm, BulletinForm, AccountForm
 from DB import orm
 from Utils import Util
 from Logic import restful, logic
@@ -32,6 +32,7 @@ def rootDir():
 
 @app.route('/bd/view_school', methods=['GET', 'POST'])
 def view_school():
+    logic._init_choices()  # Initialize choices from database
     school_id = request.args.get('id')
     q = request.args.get('q')
     if q is not None:
@@ -163,6 +164,7 @@ def delete_image():
 
 @app.route('/bd/view_institution', methods=['GET', 'POST'])
 def view_institution():
+    logic._init_choices()  # Initialize choices from database
     institution_id = request.args.get('id')
     q = request.args.get('q')
     if q is not None:

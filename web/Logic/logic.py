@@ -6,18 +6,31 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..'))
 
 from DB import orm
-from forms import SchoolForm, InstitutionForm, BulletinForm, AccountForm
-from Logic import restful
+from web.forms import SchoolForm, InstitutionForm, BulletinForm, AccountForm
+from web.Logic import restful
 
-g_choices_area = [(g.id, g.name) for g in orm.Area.query.order_by('name')]
-g_choices_schooltype = [(g.id, g.name)
-                        for g in orm.Schooltype.query.order_by('name')]
-g_choices_feature = [(g.id, g.name)
-                     for g in orm.Feature.query.order_by('name')]
-g_choices_agespan = [(g.id, g.name)
-                     for g in orm.Agespan.query.order_by('name')]
-g_choices_feetype = [(g.id, g.name)
-                     for g in orm.Feetype.query.order_by('name')]
+# Initialize as None - will be populated on first use
+g_choices_area = None
+g_choices_schooltype = None
+g_choices_feature = None
+g_choices_agespan = None
+g_choices_feetype = None
+
+
+def _init_choices():
+    """Initialize choice lists from database - called lazily on first use"""
+    global g_choices_area, g_choices_schooltype, g_choices_feature, g_choices_agespan, g_choices_feetype
+    
+    if g_choices_area is None:
+        g_choices_area = [(g.id, g.name) for g in orm.Area.query.order_by('name')]
+    if g_choices_schooltype is None:
+        g_choices_schooltype = [(g.id, g.name) for g in orm.Schooltype.query.order_by('name')]
+    if g_choices_feature is None:
+        g_choices_feature = [(g.id, g.name) for g in orm.Feature.query.order_by('name')]
+    if g_choices_agespan is None:
+        g_choices_agespan = [(g.id, g.name) for g in orm.Agespan.query.order_by('name')]
+    if g_choices_feetype is None:
+        g_choices_feetype = [(g.id, g.name) for g in orm.Feetype.query.order_by('name')]
 
 
 def GetSchoolFormById(school_id):
