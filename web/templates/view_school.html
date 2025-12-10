@@ -65,7 +65,7 @@
 </div>
 <div class="col-lg-5 col-xs-10">
 {{ render_field(form.image, accept="image/png, image/jpeg")}}
-  <p><input type="submit" value="上传" name="upload"> 注：接受jpg和png格式的图片，建议图片分辨率1000x800</p>
+  <p><input type="submit" value="Upload" name="upload"> Note: Accepts jpg and png format images, recommended resolution 1000x800</p>
 </div>
 
 </div>
@@ -78,7 +78,7 @@
 <!-- images -->
           <div class='box box-default'>
             <div class='box-header with-border'>
-              <h3 class='box-title'><i class="fa fa-tag"></i> 已经上传的图片</h3>
+              <h3 class='box-title'><i class="fa fa-tag"></i> Uploaded Images</h3>
             </div>
             <div class='box-body'>
               <div class='row'>
@@ -88,7 +88,7 @@
                 <div class='col-sm-8 col-md-4'>
                   <!-- <h4 class='text-center'>Primary</h4> -->
 		  <img src='{{"/bd/web/files/"+image.file}}' alt='{{image.file}}' height="200" width="200"/>
-		  <a href="javascript:genDeleteRef('{{image.file}}');">删除本图片</a>
+		  <a href="javascript:genDeleteRef('{{image.file}}');">Delete this image</a>
                 </div><!-- /.col -->
     {% endfor %}
   {% endif %}
@@ -98,6 +98,6 @@
             </div><!-- /.box-body -->
           </div><!-- /.box -->
 
-    <p><input type="submit" value="确定" name="confirm"></p>
+    <p><input type="submit" value="Confirm" name="confirm"></p>
 </form>
 {% endblock %}
