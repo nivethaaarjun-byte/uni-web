@@ -91,9 +91,9 @@ def view_school():
             return redirect(url_for('view_school'))
     elif request.method == 'GET' and school_id:
         form = logic.GetSchoolFormById(school_id)
-        logic.LoadBasePageInfo('修改学校', '输入并确定', form)
+        logic.LoadBasePageInfo('Edit School', 'Enter and Submit', form)
     else:
-        logic.LoadBasePageInfo('新建学校', '输入并确定', form)
+        logic.LoadBasePageInfo('New School', 'Enter and Submit', form)
 
     if form.id.data:
         school = orm.School.query.get(int(form.id.data))
@@ -134,7 +134,7 @@ def view_schools():
             return redirect(url_for('view_schools', page=page, q=q))
 
     form = PageInfo()
-    logic.LoadBasePageInfo('所有学校', '查看', form)
+    logic.LoadBasePageInfo('All Schools', 'View', form)
 
     return render_template(
         'view_schools.html',
@@ -225,9 +225,9 @@ def view_institution():
             return redirect(url_for('view_institution'))
     elif request.method == 'GET' and institution_id:
         form = logic.GetInstitutionFormById(institution_id)
-        logic.LoadBasePageInfo('修改培训机构', '输入并确定', form)
+        logic.LoadBasePageInfo('Edit Institution', 'Enter and Submit', form)
     else:
-        logic.LoadBasePageInfo('新建培训机构', '输入并确定', form)
+        logic.LoadBasePageInfo('New Institution', 'Enter and Submit', form)
 
     if form.id.data:
         institution = orm.Institution.query.get(int(form.id.data))
@@ -268,7 +268,7 @@ def view_institutions():
             return redirect(url_for('view_institutions', page=page, q=q))
 
     form = PageInfo()
-    logic.LoadBasePageInfo('所有培训机构', '查看', form)
+    logic.LoadBasePageInfo('All Institutions', 'View', form)
 
     return render_template(
         'view_institutions.html',
@@ -320,10 +320,10 @@ def view_bulletin():
             return redirect(url_for('view_bulletin'))
     elif request.method == 'GET' and bulletin_id:
         form = logic.GetBulletinFormById(bulletin_id)
-        logic.LoadBasePageInfo('修改公告', '输入并确定', form)
+        logic.LoadBasePageInfo('Edit Bulletin', 'Enter and Submit', form)
     else:
         form.dt.data = datetime.datetime.now()
-        logic.LoadBasePageInfo('新建公告', '输入并确定', form)
+        logic.LoadBasePageInfo('New Bulletin', 'Enter and Submit', form)
 
     if form.id.data:
         bulletin = orm.Bulletin.query.get(int(form.id.data))
@@ -362,7 +362,7 @@ def view_bulletins():
             return redirect(url_for('view_bulletins', page=page, q=q))
 
     form = PageInfo()
-    logic.LoadBasePageInfo('所有公告', '查看', form)
+    logic.LoadBasePageInfo('All Bulletins', 'View', form)
 
     return render_template(
         'view_bulletins.html',
@@ -404,9 +404,9 @@ def view_account():
         return redirect(url_for('view_account'))
     elif request.method == 'GET' and account_id:
         form = logic.GetAccountFormById(account_id)
-        logic.LoadBasePageInfo('修改用户', '输入并确定', form)
+        logic.LoadBasePageInfo('Edit User', 'Enter and Submit', form)
     else:
-        logic.LoadBasePageInfo('新建用户', '输入并确定', form)
+        logic.LoadBasePageInfo('New User', 'Enter and Submit', form)
 
     if form.id.data:
         account = orm.Account.query.get(int(form.id.data))
@@ -438,7 +438,7 @@ def view_accounts():
             return redirect(url_for('view_accounts', page=page, q=q))
 
     form = PageInfo()
-    logic.LoadBasePageInfo('所有用户', '查看', form)
+    logic.LoadBasePageInfo('All Users', 'View', form)
 
     return render_template(
         'view_accounts.html',
