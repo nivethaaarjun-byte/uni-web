@@ -143,7 +143,8 @@ class Account(Resource):
 api.add_resource(Account, '/bd/api/v1.0/account')
 
 # Create the Flask-Restless API manager.
-orm.db.create_all()
+# Note: Tables are created via SQL script (create_tables.sql) not via ORM
+# orm.db.create_all()  # Commented out - we create tables manually with PostgreSQL-compatible SQL
 manager = flask_restless.APIManager(app, flask_sqlalchemy_db=orm.db)
 
 # Create API endpoints, which will be available at /api/<tablename> by
