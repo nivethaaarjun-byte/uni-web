@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>{{ form.pagename }} - 学校宝典</title>
+    <title>{{ form.pagename }} - University Admin</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="/bd/web/AdminLTE/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
@@ -45,9 +45,9 @@
         <!-- Logo -->
         <a href="/index.html" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>宝典</b></span>
+          <span class="logo-mini"><b>Admin</b></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>学校宝典</b></span>
+          <span class="logo-lg"><b>University Admin</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -66,36 +66,36 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="/bd/web/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs">管理员</span>
+                  <span class="hidden-xs">Administrator</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="/bd/web/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
-                      管理员
-                      <small>2015年</small>
+                      Administrator
+                      <small>2015</small>
                     </p>
                   </li>
                   <!-- Menu Body -->
                   <li class="user-body">
                     <div class="col-xs-4 text-center">
-                      <a href="#">工作1</a>
+                      <a href="#">Task 1</a>
                     </div>
                     <div class="col-xs-4 text-center">
-                      <a href="#">工作2</a>
+                      <a href="#">Task 2</a>
                     </div>
                     <div class="col-xs-4 text-center">
-                      <a href="#">工作3</a>
+                      <a href="#">Task 3</a>
                     </div>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">个人信息</a>
+                      <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">签出</a>
+                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -122,9 +122,9 @@
               <img src="/bd/web/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
-              <p>管理员</p>
+              <p>Administrator</p>
 
-              <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
 	  <!-- }}} -->
@@ -134,7 +134,7 @@
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="搜索..."/>
+              <input type="text" name="q" class="form-control" placeholder="Search..."/>
               <span class="input-group-btn">
                 <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
@@ -145,37 +145,37 @@
 
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">导航</li>
-	    <li class="active"><a href="/bd/view_schools"><i class="fa fa-circle-o"></i> 所有学校 
+            <li class="header">Navigation</li>
+	    <li class="active"><a href="/bd/view_schools"><i class="fa fa-circle-o"></i> All Schools
 		{% if form and form.school_count %}
                <small class="label pull-right bg-yellow">{{form.school_count}}</small>
 	       {%  endif %}
 </a></li>
-	    <li class="active"><a href="/bd/view_institutions"><i class="fa fa-circle-o"></i> 所有培训机构
+	    <li class="active"><a href="/bd/view_institutions"><i class="fa fa-circle-o"></i> All Institutions
 		{% if form and form.institution_count %}
                <small class="label pull-right bg-yellow">{{form.institution_count}}</small>
 	       {%  endif %}
 </a></li>
-	    <li class="active"><a href="/bd/view_bulletins"><i class="fa fa-circle-o"></i> 公告列表
+	    <li class="active"><a href="/bd/view_bulletins"><i class="fa fa-circle-o"></i> Bulletin List
 		{% if form and form.bulletin_count %}
                <small class="label pull-right bg-yellow">{{form.bulletin_count}}</small>
 	       {%  endif %}
 </a></li>
-	    <li class="active"><a href="/bd/view_accounts"><i class="fa fa-circle-o"></i> 用户帐号列表
+	    <li class="active"><a href="/bd/view_accounts"><i class="fa fa-circle-o"></i> User Accounts
 		{% if form and form.account_count %}
                <small class="label pull-right bg-yellow">{{form.account_count}}</small>
 	       {%  endif %}
 </a></li>
-	    <li class="header">编辑</li>
-	    <li class="active"><a href="/bd/view_school"><i class="fa fa-circle-o"></i> 新建学校</a></li>
-	    <li class="active"><a href="/bd/view_institution"><i class="fa fa-circle-o"></i> 新建培训机构</a></li>
-	    <li class="active"><a href="/bd/view_bulletin"><i class="fa fa-circle-o"></i> 新建公告</a></li>
-	    <li class="active"><a href="/bd/view_account"><i class="fa fa-circle-o"></i> 新建用户帐号</a></li>
+	    <li class="header">Create New</li>
+	    <li class="active"><a href="/bd/view_school"><i class="fa fa-circle-o"></i> New School</a></li>
+	    <li class="active"><a href="/bd/view_institution"><i class="fa fa-circle-o"></i> New Institution</a></li>
+	    <li class="active"><a href="/bd/view_bulletin"><i class="fa fa-circle-o"></i> New Bulletin</a></li>
+	    <li class="active"><a href="/bd/view_account"><i class="fa fa-circle-o"></i> New User Account</a></li>
 
-	    <li class="header">其他</li>
-            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>工作1</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>工作2</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>工作3</span></a></li>
+	    <li class="header">Other</li>
+            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Task 1</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Task 2</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Task 3</span></a></li>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -194,7 +194,7 @@
             <small>{{form.pagetask}}</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">{{form.pagename}}</li>
           </ol>
         </section>
