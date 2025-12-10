@@ -5,9 +5,9 @@ import sys
 
 sys.path.append(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.pardir))
-import app
+from web.app import app
 
-db = SQLAlchemy(app.app)
+db = SQLAlchemy(app)
 
 class Account(db.Model):
     id = db.Column(db.Integer, primary_key=True)
