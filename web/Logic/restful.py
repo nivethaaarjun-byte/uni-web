@@ -49,39 +49,125 @@ def PostAccount(body):
 
 
 def GetSchools(page, name=None):
+    """Get schools directly from database instead of making HTTP requests"""
+    from DB import orm
+    from flask import url_for
+    
+    per_page = 7  # Same as API default
+    
     if name is None:
-        x = requests.get('%s?page=%d' % (RESTFUL_SCHOOL, page)).text
-        return json.loads(x)
+        query = orm.School.query
     else:
-        q_value = '{"filters":[{"name":"name","op":"like","val":"%%%s%%"}]}' % name
-        q_value = urllib.quote(q_value.encode('utf-8'))
-        return json.loads(
-            requests.get(
-                '%s?page=%d&q=%s' % (RESTFUL_SCHOOL, page, q_value)).text)
+        query = orm.School.query.filter(orm.School.name.like('%%%s%%' % name))
+    
+    pagination = query.paginate(page=page, per_page=per_page, error_out=False)
+    
+    # Format response to match API structure
+    objects = []
+    for school in pagination.items:
+        school_dict = {
+            ITEM_ID: school.id,
+            ITEM_NAME: school.name,
+            'area_id': school.area_id,
+            'teachdesc': school.teachdesc,
+            'address': school.address,
+            'schooltype_id': school.schooltype_id,
+            'website': school.website,
+            'distinguish': school.distinguish,
+            'leisure': school.leisure,
+            'threashold': school.threashold,
+            'partner': school.partner,
+            'artsource': school.artsource,
+            'feedesc': school.feedesc,
+            'longitude': school.longitude,
+            'latitude': school.latitude,
+            ITEM_SCHOOLIMAGES: [{'id': img.id, 'file': img.file} for img in school.schoolimages]
+        }
+        objects.append(school_dict)
+    
+    return {
+        ITEM_OBJECTS: objects,
+        ITEM_PAGE: page,
+        ITEM_TOTAL_PAGES: pagination.pages,
+        ITEM_NUM_RESULTS: pagination.total
+    }
 
 
 def GetInstitutions(page, name=None):
+    """Get institutions directly from database instead of making HTTP requests"""
+    from DB import orm
+    
+    per_page = 10  # Default per page
+    
     if name is None:
-        return json.loads(
-            requests.get('%s?page=%d' % (RESTFUL_INSTITUTION, page)).text)
+        query = orm.Institution.query
     else:
-        q_value = '{"filters":[{"name":"name","op":"like","val":"%%%s%%"}]}' % name
-        q_value = urllib.quote(q_value.encode('utf-8'))
-        return json.loads(
-            requests.get(
-                '%s?page=%d&q=%s' % (RESTFUL_INSTITUTION, page, q_value)).text)
+        query = orm.Institution.query.filter(orm.Institution.name.like('%%%s%%' % name))
+    
+    pagination = query.paginate(page=page, per_page=per_page, error_out=False)
+    
+    objects = []
+    for institution in pagination.items:
+        inst_dict = {
+            ITEM_ID: institution.id,
+            ITEM_NAME: institution.name,
+            'agespan_id': institution.agespan_id,
+            'area_id': institution.area_id,
+            'address': institution.address,
+            'location': institution.location,
+            'website': institution.website,
+            'telephone': institution.telephone,
+            'feedesc': institution.feedesc,
+            'timeopen': institution.timeopen.isoformat() if institution.timeopen else None,
+            'timeclose': institution.timeclose.isoformat() if institution.timeclose else None,
+            'feetype_id': institution.feetype_id,
+            'longitude': institution.longitude,
+            'latitude': institution.latitude,
+            ITEM_INSTITUTIONIMAGES: [{'id': img.id, 'file': img.file} for img in institution.institutionimages]
+        }
+        objects.append(inst_dict)
+    
+    return {
+        ITEM_OBJECTS: objects,
+        ITEM_PAGE: page,
+        ITEM_TOTAL_PAGES: pagination.pages,
+        ITEM_NUM_RESULTS: pagination.total
+    }
 
 
 def GetBulletins(page, title=None):
+    """Get bulletins directly from database instead of making HTTP requests"""
+    from DB import orm
+    
+    per_page = 10  # Default per page
+    
     if title is None:
-        return json.loads(
-            requests.get('%s?page=%d' % (RESTFUL_BULLETIN, page)).text)
+        query = orm.Bulletin.query
     else:
-        q_value = '{"filters":[{"name":"title","op":"like","val":"%%%s%%"}]}' % title
-        q_value = urllib.quote(q_value.encode('utf-8'))
-        return json.loads(
-            requests.get(
-                '%s?page=%d&q=%s' % (RESTFUL_BULLETIN, page, q_value)).text)
+        query = orm.Bulletin.query.filter(orm.Bulletin.title.like('%%%s%%' % title))
+    
+    pagination = query.paginate(page=page, per_page=per_page, error_out=False)
+    
+    objects = []
+    for bulletin in pagination.items:
+        bull_dict = {
+            ITEM_ID: bulletin.id,
+            'dt': bulletin.dt.isoformat() if bulletin.dt else None,
+            'title': bulletin.title,
+            'content': bulletin.content,
+            'valid': bulletin.valid,
+            'source': bulletin.source,
+            'author': bulletin.author,
+            ITEM_BULLETINIMAGES: [{'id': img.id, 'file': img.file} for img in bulletin.bulletinimages]
+        }
+        objects.append(bull_dict)
+    
+    return {
+        ITEM_OBJECTS: objects,
+        ITEM_PAGE: page,
+        ITEM_TOTAL_PAGES: pagination.pages,
+        ITEM_NUM_RESULTS: pagination.total
+    }
 
 
 def GetPagingFromResult(result):
@@ -98,13 +184,42 @@ def GetPagingFromResult(result):
 
 
 def GetAccounts(page, title=None):
+    """Get accounts directly from database instead of making HTTP requests"""
+    from DB import orm
+    from sqlalchemy import or_
+    
+    per_page = 10  # Default per page
+    
     if title is None:
-        return json.loads(
-            requests.get('%s?page=%d' % (RESTFUL_ACCOUNT, page)).text)
+        query = orm.Account.query
     else:
-        q_value = '{"filters":[{"or":[{"name":"username","op":"like","val":"%%%s%%"},{"name":"name","op":"like","val":"%%%s%%"},{"name":"telephone","op":"like","val":"%%%s%%"}]}]}' % (
-            title, title, title)
-        q_value = urllib.quote(q_value.encode('utf-8'))
-        return json.loads(
-            requests.get(
-                '%s?page=%d&q=%s' % (RESTFUL_BULLETIN, page, q_value)).text)
+        query = orm.Account.query.filter(
+            or_(
+                orm.Account.username.like('%%%s%%' % title),
+                orm.Account.name.like('%%%s%%' % title),
+                orm.Account.telephone.like('%%%s%%' % title)
+            )
+        )
+    
+    pagination = query.paginate(page=page, per_page=per_page, error_out=False)
+    
+    objects = []
+    for account in pagination.items:
+        acc_dict = {
+            ITEM_ID: account.id,
+            ITEM_USERNAME: account.username,
+            ITEM_NAME: account.name,
+            ITEM_TELEPHONE: account.telephone,
+            'role': account.role,
+            ITEM_FLAG_TELEPHONE: account.flag_telephone,
+            ITEM_SOURCE: account.source,
+            ITEM_DTCREATE: account.dtcreate.isoformat() if account.dtcreate else None
+        }
+        objects.append(acc_dict)
+    
+    return {
+        ITEM_OBJECTS: objects,
+        ITEM_PAGE: page,
+        ITEM_TOTAL_PAGES: pagination.pages,
+        ITEM_NUM_RESULTS: pagination.total
+    }
