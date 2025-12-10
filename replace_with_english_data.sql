@@ -78,3 +78,4 @@ INSERT INTO bulletin (id, dt, title, content, valid, source, author) VALUES
 -- Note: You can add sample schools and institutions through the web interface at:
 -- https://uni-web-l8ba.onrender.com/bd/view_school
 -- https://uni-web-l8ba.onrender.com/bd/view_institution
+`
