@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, HiddenField, TextAreaField, SelectField, DecimalField, SelectMultipleField, DateTimeField, BooleanField
 from wtforms.validators import DataRequired, Length, Regexp
 from flask_uploads import UploadSet, IMAGES
@@ -14,7 +14,7 @@ class PageInfo():
         self.pagetask = pagetask
 
 
-class SchoolForm(Form):
+class SchoolForm(FlaskForm):
     id = HiddenField('id')
     name = StringField('学校名称', validators=[Length(min=1, max=50)])  # 学校名称
     area_id = SelectField(u'所在区县', coerce=int)  # 区县
@@ -35,7 +35,7 @@ class SchoolForm(Form):
         '上传图片', validators=[FileAllowed(['jpg', 'png'], 'Images only!')])
 
 
-class InstitutionForm(Form):
+class InstitutionForm(FlaskForm):
     id = HiddenField('id')
     name = StringField('品牌名', validators=[Length(min=1, max=50)])
     agespan_id = SelectField(u'招生年龄', coerce=int)
@@ -56,7 +56,7 @@ class InstitutionForm(Form):
         '上传图片', validators=[FileAllowed(['jpg', 'png'], 'Images only!')])
 
 
-class BulletinForm(Form):
+class BulletinForm(FlaskForm):
     id = HiddenField('id')
     dt = DateTimeField('发布时间', format='%Y-%m-%d %H:%M:%S')
     title = StringField('标题')
@@ -68,7 +68,7 @@ class BulletinForm(Form):
         '上传图片', validators=[FileAllowed(['jpg', 'png'], 'Images only!')])
 
 
-class AccountForm(Form):
+class AccountForm(FlaskForm):
     id = HiddenField('id')
     dtcreate = DateTimeField('注册时间', format='%Y-%m-%d %H:%M:%S')
     username = StringField('登录名')
