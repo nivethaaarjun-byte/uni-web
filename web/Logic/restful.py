@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
+import os
 
-ROOT_DOMAIN = 'http://127.0.0.1:5010'
+# Use environment variable or construct from request context
+# In production (Render), this will use the deployed URL
+# In development, it will use localhost
+ROOT_DOMAIN = os.environ.get('APP_URL', 'http://127.0.0.1:5010')
 ROOT_RESTFUL = ROOT_DOMAIN + '/bd/api/v1.0'
 
 RESTFUL_SCHOOL = ROOT_RESTFUL + '/school'
