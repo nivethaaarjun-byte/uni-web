@@ -97,7 +97,7 @@ def post_post_account(result=None, **kw):
         account.checkcode = str(random.randint(100001, 999999))
         orm.db.session.commit()
         # send sms verification here
-        message = '您的验证码为%s, 请勿告诉他人，15分钟有效 【学莫愁】' % account.checkcode
+        message = 'Your verification code is %s. Please do not share with others. Valid for 15 minutes.' % account.checkcode
         Util.SendSMSByZA(account.telephone, message)
     return result
     pass
@@ -120,7 +120,7 @@ class Account(Resource):
                 account.dtcreate = datetime.datetime.now()
                 account.checkcode = str(random.randint(100001, 999999))
                 orm.db.session.commit()
-                message = '您的验证码为%s, 请勿告诉他人，15分钟有效 【学莫愁】' % account.checkcode
+                message = 'Your verification code is %s. Please do not share with others. Valid for 15 minutes.' % account.checkcode
                 Util.SendSMSByZA(account.telephone, message)
 
             dtcreate = account.dtcreate.strftime(
