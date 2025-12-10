@@ -433,6 +433,10 @@ def view_accounts():
     if request.method == 'POST':
         form = AccountForm(request.form)
         if 'delete' in request.form:
+            # Delete associated terminals first
+            for terminal in orm.Terminal.query.filter_by(account_id=int(form.id.data)).all():
+                orm.db.session.delete(terminal)
+            # Then delete the account
             orm.db.session.delete(orm.Account.query.get(int(form.id.data)))
             orm.db.session.commit()
             return redirect(url_for('view_accounts', page=page, q=q))

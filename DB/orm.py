@@ -327,7 +327,7 @@ class Terminal(db.Model):
     os = db.Column(db.String(20))
     code = db.Column(db.String(255))
 
-    account = db.relationship(u'Account', backref=db.backref('terminals'))
+    account = db.relationship(u'Account', backref=db.backref('terminals', cascade="all, delete-orphan"))
 
     def __init__(self, account_id, os=None, code=None):
         self.account_id = account_id
